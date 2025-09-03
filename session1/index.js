@@ -6,9 +6,20 @@ const PORT = 8081;
 
 // create a server
 const server = http.createServer((req,res)=>{
-    res.writeHead(200, {'Content-Type': 'text/plain'});
-    res.write(`Hello I am listening on port ${PORT}`);
-    res.end();
+    // will look at how to add path (/)
+    const path = req.url;
+    if(path === "/"){
+        res.writeHead(200,{'content-Type': 'text/html'});
+        res.write('<h1> Hello you are on / path</h1>');
+        res.end();
+    }else if(path==='/sell'){
+        res.writeHead(200, {'Content-Type': 'text/html'});
+        res.write(`Thanks for reaching out `);
+        res.write('<h2>You Order on the way</h2>');
+        res.end();
+    }
+
+
 })
 
 // Binding the server to a port
