@@ -1,6 +1,8 @@
-const server = require('express');
-const UserActivityRoute = require('./Routes/UserActivityRoute');
-const HomeRoute = require('./Routes/HomeRoute');
+const express = require('express');
+const server = express();
+const HomeRoute = require("./Routes/HomeRoute");
+const UserActivityRoute = require("./Routes/UserActivityRoute");
+
 const PORT = 8083;
 
 // Controller Addeds
@@ -9,9 +11,7 @@ server.use('/',HomeRoute);
 // // API endpoint to get user data
 // server.use('/api/v1/users',UserActivityRoute);
 
-server.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+
 
 // Till here every thing is working fine
 // But the problem is all user data can be acccessed bu anyone
@@ -37,3 +37,8 @@ server.use('/api/v1/users',AuthenticateMiddleware,UserActivityRoute);
 // we can access user data only if we provide the correct API key in the request header
 // Example using curl
 // curl -H "Authorization: 12345-ABCDE" http://localhost:8083/api/v1/users
+
+
+server.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
