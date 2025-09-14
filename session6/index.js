@@ -5,7 +5,7 @@ const UserActivityRoute = require("./Routes/UserActivityRoute");
 const UserModelRoute = require('./Routes/UserModelRoute');
 const BlogRoute = require('./Routes/BlogRoute');
 const { mongoose } = require("mongoose");
-
+const userInputValidatorMiddleware = require('./Middlewares/UserInputValidatorMiddleware');
 const PORT = 8083;
 
 // Controller Addeds
@@ -43,7 +43,7 @@ server.use('/api/v1/users',AuthenticateMiddleware,UserActivityRoute);
 
 // creating a new servercise to post user data
 server.use(express.json()); // Middleware to parse JSON request body
-server.use('/api/v2/users',UserModelRoute);
+server.use('/api/v2/users',userInputValidatorMiddleware, UserModelRoute);
 
 
 // Blog API
