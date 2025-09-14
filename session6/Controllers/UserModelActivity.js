@@ -1,15 +1,16 @@
 const UserModel = require('../Model/UserModel');
+const UserService = require('../Services/UserService');
 
 async function createUser(req, res) {
-    const {username, email, password} = req.body;
+    const {body} = req;
 
-    // will create object of UserModel
-    const newUser = new UserModel({username, email, password});
+    // A good pratice to destructure the body
+    const {username, email, password} = body;
 
-    // save the user to database
+    // save the user to database is moved to Service
    try {
-       await newUser.save();
-       res.status(201).json(newUser);
+       const user = await new UserService(UserModel).createUser({username, email, password});
+       res.status(201).json(user);
    } catch (error) {
        res.status(400).json({error: error.message});
    }
