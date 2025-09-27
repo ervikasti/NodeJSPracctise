@@ -7,5 +7,6 @@ router.post('/register', createUser);
 router.get('/all',userAuthenticationMiddleware, getAllUser);
 router.get('/:username',userAuthenticationMiddleware, getUserName);
 
+
 module.exports = router;
 
